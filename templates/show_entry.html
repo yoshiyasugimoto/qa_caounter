@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>m-lab勤怠全件表示</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+    body { background-color: white; }
+    h1,h2,h3 { font-size: 18px; }
+    li { list-style: none;}
+    table{
+        width: 100%;
+        border - collapse: collapse;
+    }
+
+
+    </style>
+</head>
+<body>
+<form class="form-inline" action="/filter" method="POST">
+    <a href="{{ url_for('.filter')  }}">
+        <button type="button" class="btn btn-outline-primary btn-lg">検索画面へ</button>
+    </a>
+</form>
+
+<table class="table table-border table-striped ">
+    <thead class="">
+    <tr>
+        <th>名前</th>
+        <th>出勤記録</th>
+        <th>退勤記録</th>
+        <th>就業時間</th>
+        <th>残業時間</th>
+        <th>総労働時間</th>
+        <th>編集</th>
+    </tr>
+    </thead>
+
+    {% for data in context %}
+    <tr>
+        <td>{{data.username}}</td>
+        <td>{{data.attendance_time}}</td>
+        <td>{{data.finish_time}}</td>
+        <td>{{data.working_time}}</td>
+        <td>{{data.overworking_time}}</td>
+        <td>{{data.total_working_time}}</td>
+        <td><a href="{{ url_for('.edit', id=data.id)  }}">
+            編集</a></td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

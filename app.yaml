@@ -1,0 +1,12 @@
+runtime: python37
+
+handlers:
+- url: /static
+  static_dir: static
+- url: /.*
+  redirect_http_response_code: 301
+  script: auto
+
+env_variables:
+  DB_CONNECT: '接続名'
+  WEB_HOOK_URL: 'SLACK_WEB_HOOK_URL'

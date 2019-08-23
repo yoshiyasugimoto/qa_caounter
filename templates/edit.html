@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>編集画面</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+    body { background-color: white; }
+    h1,h2,h3 { font-size: 18px; }
+    li { list-style: none;}
+    table{
+        width: 100%;
+        border - collapse: collapse;
+    }
+
+
+    </style>
+
+
+</head>
+<body>
+
+<ul class="nav justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link active" href="/show_entry">全件表示</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/filter">検索</a>
+    </li>
+</ul>
+{% for data in context %}
+<form action="{{ url_for('.edit_update', id=data.id) }}" method="POST">
+
+    <table class="table table-striped">
+        <tr>
+            <th>名前</th>
+            <th>出勤記録</th>
+            <th>退勤記録</th>
+        </tr>
+        <tr>
+            <td>
+                <p><label>ユーザー名 <input type="text" name="edit_name" value={{data.username}}></label></p>
+            </td>
+            <td>
+                <p><label>出勤時間 <input type="text" name="attendance_time" step="1"
+                                      value={{data.attendance_time}}></label></p>
+            </td>
+            <td>
+                <p><label>退勤時間 <input type="text" name="finish_time" step="1" value={{data.finish_time}}></label></p>
+            </td>
+        </tr>
+    </table>
+    {% endfor %}
+    <button class="button btn  float-right btn-primary " type="submit">更新</button>
+</form>
+</body>
+</html>

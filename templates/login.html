@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>m-lab勤怠記録login画面</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body class="text-center">
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<ul class=flashes>
+    {% for category, message in messages %}
+    <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+{% block body %}
+<div class="container mt-5">
+
+    <form class="form-signin" action="/login" method="POST">
+        <img class="mb-4" src="https://picsum.photos/200/200/?random" alt="mlab">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <label for="inputlogin" class="sr-only">ログイン名</label><input type="text" id="inputlogin" name="loginname"
+                                                                    placeholder="mlab" required autofocus>
+        <p><label for="inputpassword" class="sr-only">パスワード</label><input type="password" id="inputpassword"
+                                                                          name="password" placeholder="password"
+                                                                          required></p>
+        <p>
+            <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+        </p>
+    </form>
+</div>
+{% endblock %}
+</body>
+</html>
+

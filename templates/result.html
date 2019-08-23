@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>検索結果</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        li { list-style: none;}
+
+
+
+
+
+
+    </style>
+
+</head>
+<body>
+<ul class="nav justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link active" href="/show_entry">全件表示</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/filter">検索</a>
+    </li>
+</ul>
+
+<table class="table table-border table-striped">
+
+    <thead class="">
+    <tr>
+        <th>名前</th>
+        <th>出勤記録</th>
+        <th>退勤記録</th>
+        <th>就業時間</th>
+        <th>残業時間</th>
+        <th>総労働時間</th>
+        <th>編集</th>
+        {% if sum_total_working_time %}
+        <th>合計総労働時間</th>
+        {% endif %}
+    </tr>
+    </thead>
+
+    {% for data in context %}
+    <tr>
+        <td>{{data.username}}</td>
+        <td>{{data.attendance_time}}</td>
+        <td>{{data.finish_time}}</td>
+        <td>{{data.working_time}}</td>
+        <td>{{data.overworking_time}}</td>
+        <td>{{data.total_working_time}}</td>
+        <td><a href="{{ url_for('.edit', id=data.id)  }}">
+            編集</a></td>
+        {% endfor %}
+        {% if sum_total_working_time %}
+        <td>
+            {{sum_total_working_time}}
+        </td>
+        {% endif %}
+    </tr>
+</table>
+</body>
+</html>

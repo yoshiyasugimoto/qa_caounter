@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>勤怠検索</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<ul class=flashes>
+    {% for category, message in messages %}
+    <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+{% block body %}
+
+<div class="container mt-5">
+    <form action="/filter" method="POST">
+        <div class="form-group mx-auto" style="width: 200px;">
+            <label>ユーザー名:<input class="form-control form-inline" type="text" name="username"
+                                placeholder="検索したい人のslack名を入れてください"></label><br/>
+        </div>
+        <div class="form-group mx-auto" style="width: 200px;">
+        <label>検索開始日:<input class="form-control form-inline" type="text" name="search_start"
+                            value="2019-07-01_00:00:00"></label><br/>
+        </div>
+        <div class="form-group mx-auto" style="width: 200px;">
+        <label>検索終了日:<input class="form-control form-inline" type="text" name="search_end"
+                            value="2019-08-01_00:00:00"></label><br/>
+        </div>
+        <div class="mx-auto" style="width: 200px;">
+        <label>
+            <button class="btn btn-lg btn-primary" type="submit">検索</button>
+        </label>
+        </div>
+
+    </form>
+</div>
+<ul class="nav justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link active" href="/show_entry">全件表示</a>
+  </li>
+</ul>
+{% endblock %}
+</body>
+</html>
